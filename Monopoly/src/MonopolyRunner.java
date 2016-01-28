@@ -69,18 +69,18 @@ public class MonopolyRunner
 	}
 	
 	
-	public static int yesOrNo()
+	public static String yesOrNo()
 	{
 	System.out.println("Type either 'Y' or 'N'.");	
 	Scanner userInput1 = new Scanner(System.in);
 	String georgeBush = userInput1.nextLine();
-	if(userInput1.equals("Y") || userInput1.equals("y"))
+	if(georgeBush.equals("Y") || georgeBush.equals("y"))
 		{
-		return 1;
+		return "1";
 		}
 	else
 		{
-		return 0;
+		return "0";
 		}
 	}
 	
@@ -108,11 +108,12 @@ public class MonopolyRunner
 		if(Board.space.get(playerOnePosition-1).getSpaceType().equals("property"))
 			{
 			System.out.println("Would you like to buy " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + "? You have $" + playerOneMoney + ".");	
-			if(yesOrNo() == 1)
+			
+			if(yesOrNo().equals("1"))
 				{
 				Board.space.get(playerOnePosition-1).setSpaceOwned(true);
 				Board.space.get(playerOnePosition-1).setSpaceOwner(1);
-				System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for " + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
+				System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
 				playerOneMoney -= Board.space.get(playerOnePosition-1).getSpaceCost();
 				}
 			else
@@ -123,11 +124,11 @@ public class MonopolyRunner
 		else if(Board.space.get(playerOnePosition-1).getSpaceType().equals("railroad"))
 			{
 			System.out.println("Would you like to buy " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + "? You have $" + playerOneMoney + ".");
-			if(yesOrNo() == 1)
+			if(yesOrNo().equals("1"))
 			{
 			Board.space.get(playerOnePosition-1).setSpaceOwned(true);
 			Board.space.get(playerOnePosition-1).setSpaceOwner(1);
-			System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for " + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
+			System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
 			playerOneMoney -= Board.space.get(playerOnePosition-1).getSpaceCost();
 			}
 		else
@@ -138,11 +139,11 @@ public class MonopolyRunner
 		else if(Board.space.get(playerOnePosition-1).getSpaceType().equals("utility"))
 			{
 			System.out.println("Would you like to buy " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + "? You have $" + playerOneMoney + ".");
-			if(yesOrNo() == 1)
+			if(yesOrNo().equals("1"))
 			{
 			Board.space.get(playerOnePosition-1).setSpaceOwned(true);
 			Board.space.get(playerOnePosition-1).setSpaceOwner(1);
-			System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for " + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
+			System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
 			playerOneMoney -= Board.space.get(playerOnePosition-1).getSpaceCost();
 			}
 		else
@@ -162,11 +163,13 @@ public class MonopolyRunner
 				{
 				System.out.println("You have paid $200.");
 				playerOneMoney -= 200;
+				freeParking += 200;
 				}
 			else if(Board.space.get(playerOnePosition-1).getSpaceNumber() == 39)
 				{
 				System.out.println("You have paid $100.");
 				playerOneMoney -= 100;
+				freeParking += 100;
 				}
 			else if(Board.space.get(playerOnePosition-1).getSpaceName().equals("Chance"))
 				{
@@ -210,7 +213,13 @@ public class MonopolyRunner
 				playerTwoMoney += Board.space.get(playerOnePosition-1).getSpaceRent();
 				}
 			}
+		else
+			{
+			System.out.println("You own this property.");
+			}
 		}
+	System.out.println("You have $" + playerOneMoney + ".");
+	System.out.println();
 	}
 	
 	public static void playerTwoTurn()
@@ -221,16 +230,139 @@ public class MonopolyRunner
 	String joeMama = userInput1.nextLine();
 	diceRoll = rollDice();
 	System.out.println("You rolled a " + diceRoll + ".");
+	
 	if(playerTwoPosition + diceRoll <= 40)
+	{
+	playerTwoPosition += diceRoll;
+	}
+else
+	{
+	playerTwoPosition = (playerTwoPosition + diceRoll) - 40;
+	playerTwoMoney += 200;
+	System.out.println("You have collected $200 for passing Go.");
+	}
+System.out.println("You have landed on " + Board.space.get(playerTwoPosition-1).getSpaceName() + ".");
+if(Board.space.get(playerTwoPosition-1).isSpaceOwned() == false)
+	{
+	if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("property"))
 		{
-		playerTwoPosition += diceRoll;
+		System.out.println("Would you like to buy " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + "? You have $" + playerTwoMoney + ".");	
+		
+		if(yesOrNo().equals("1"))
+			{
+			Board.space.get(playerTwoPosition-1).setSpaceOwned(true);
+			Board.space.get(playerTwoPosition-1).setSpaceOwner(2);
+			System.out.println("You have bought " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + ".");
+			playerTwoMoney -= Board.space.get(playerTwoPosition-1).getSpaceCost();
+			}
+		else
+			{
+			
+			}
+		}
+	else if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("railroad"))
+		{
+		System.out.println("Would you like to buy " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + "? You have $" + playerTwoMoney + ".");
+		if(yesOrNo().equals("1"))
+		{
+		Board.space.get(playerTwoPosition-1).setSpaceOwned(true);
+		Board.space.get(playerTwoPosition-1).setSpaceOwner(2);
+		System.out.println("You have bought " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + ".");
+		playerTwoMoney -= Board.space.get(playerTwoPosition-1).getSpaceCost();
 		}
 	else
 		{
-		playerTwoPosition = (playerTwoPosition + diceRoll) - 40;
+		
 		}
-	System.out.println("You are on space " + playerTwoPosition);
+		}
+	else if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("utility"))
+		{
+		System.out.println("Would you like to buy " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + "? You have $" + playerTwoMoney + ".");
+		if(yesOrNo().equals("1"))
+		{
+		Board.space.get(playerTwoPosition-1).setSpaceOwned(true);
+		Board.space.get(playerTwoPosition-1).setSpaceOwner(2);
+		System.out.println("You have bought " + Board.space.get(playerTwoPosition-1).getSpaceName() + " for $" + Board.space.get(playerTwoPosition-1).getSpaceCost() + ".");
+		playerTwoMoney -= Board.space.get(playerTwoPosition-1).getSpaceCost();
+		}
+	else
+		{
+		
+		}
+		}
+	else if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("other"))
+		{
+		if(Board.space.get(playerTwoPosition-1).getSpaceNumber() == 21)
+			{
+			System.out.println("You have collected $" + freeParking + "!");
+			playerTwoMoney += freeParking;
+			freeParking = 0;
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceNumber() == 5)
+			{
+			System.out.println("You have paid $200.");
+			playerTwoMoney -= 200;
+			freeParking += 200;
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceNumber() == 39)
+			{
+			System.out.println("You have paid $100.");
+			playerTwoMoney -= 100;
+			freeParking += 100;
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceName().equals("Chance"))
+			{
+			System.err.println("Chance");
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceName().equals("Community Chest"))
+			{
+			System.err.println("Community Chest");
+			}
+		}
 	}
+else
+	{
+	if(Board.space.get(playerTwoPosition-1).getSpaceOwner() == 1)
+		{
+		if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("property"))
+			{
+			System.out.println("You have payed $" + Board.space.get(playerTwoPosition-1).getSpaceRent() + " to " + playerOneName + ".");
+			playerTwoMoney -= Board.space.get(playerTwoPosition-1).getSpaceRent();
+			playerOneMoney += Board.space.get(playerTwoPosition-1).getSpaceRent();
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("utility"))
+			{
+			if(Board.space.get(13).getSpaceOwner() == 1 && Board.space.get(29).getSpaceOwner() == 1)
+				{
+				System.out.println("You have payed $" + (diceRoll*10) + " to " + playerTwoName + ".");
+				playerTwoMoney -= diceRoll*10;
+				playerOneMoney += diceRoll*10;
+				}
+			else
+				{
+				System.out.println("You have payed $" + (diceRoll*4) + " to " + playerTwoName + ".");
+				playerTwoMoney -= diceRoll*4;
+				playerOneMoney += diceRoll*4;
+				}
+			}
+		else if(Board.space.get(playerTwoPosition-1).getSpaceType().equals("railroad"))
+			{
+			System.out.println("You have payed $" + Board.space.get(playerTwoPosition-1).getSpaceRent() + " to " + playerOneName + ".");
+			playerTwoMoney -= Board.space.get(playerTwoPosition-1).getSpaceRent();
+			playerOneMoney += Board.space.get(playerTwoPosition-1).getSpaceRent();
+			}
+		}
+	else
+		{
+		System.out.println("You own this property.");
+		}
+	}
+System.out.println("You have $" + playerTwoMoney + ".");
+System.out.println();
+}
+	
+	
+	
 	
 
 }

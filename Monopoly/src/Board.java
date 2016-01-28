@@ -22,7 +22,7 @@ public class Board
 	space.add(new Space(12, "property", "St. Charles Place", false, 0, 140, 10, 0, 0));
 	space.add(new Space(13, "utility", "Electric Company", false, 0, 150, 0, 0, 0));
 	space.add(new Space(14, "property", "States Avenue", false, 0, 140, 10, 0, 0));
-	space.add(new Space(15, "property", "Virginia", false, 0, 160, 12, 0, 0));
+	space.add(new Space(15, "property", "Virginia Avenue", false, 0, 160, 12, 0, 0));
 	space.add(new Space(16, "railroad", "Pennsylvania Railroad", false, 0, 200, 25, 0, 0));
 	space.add(new Space(17, "property", "St. James Place", false, 0, 180, 14, 0, 0));
 	space.add(new Space(18, "other", "Community Chest", false, 0, 0, 0, 0, 0));
