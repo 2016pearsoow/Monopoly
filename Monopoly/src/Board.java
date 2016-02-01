@@ -8,7 +8,7 @@ public class Board
 	
 	public static void fillBoard()
 	{
-	space.add(new Space(1, "other", "go", false, 0, 0, 0, 0, 0));
+	space.add(new Space(1, "other", "Go", false, 0, 0, 0, 0, 0));
 	space.add(new Space(2, "property", "Mediterranean Avenue", false, 0, 60, 2, 0, 0));
 	space.add(new Space(3, "other", "Community Chest", false, 0, 0, 0, 0, 0));
 	space.add(new Space(4, "property", "Baltic Avenue", false, 0, 60, 4, 0, 0));

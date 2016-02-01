@@ -15,6 +15,10 @@ public class MonopolyRunner
 	static int freeParking = 0;
 	static int playerOneRailroadsOwned = 0;
 	static int playerTwoRailroadsOwned = 0;
+	static boolean playerOneJail = false;
+	static boolean playerTwoJail = false;
+	static int playerOneJailTurns;
+	static int playerTwoJailTurns;
 	
 	public static void main(String[] args) 
 	{
@@ -92,6 +96,8 @@ public class MonopolyRunner
 	String sushi = userInput1.nextLine();
 	diceRoll = rollDice();
 	System.out.println("You rolled a " + diceRoll + ".");
+	if(playerOneJail = false)
+	{
 	if(playerOnePosition + diceRoll <= 40)
 		{
 		playerOnePosition += diceRoll;
@@ -102,6 +108,7 @@ public class MonopolyRunner
 		playerOneMoney += 200;
 		System.out.println("You have collected $200 for passing Go.");
 		}
+	}
 	System.out.println("You have landed on " + Board.space.get(playerOnePosition-1).getSpaceName() + ".");
 	if(Board.space.get(playerOnePosition-1).isSpaceOwned() == false)
 		{
@@ -146,7 +153,7 @@ public class MonopolyRunner
 			System.out.println("You have bought " + Board.space.get(playerOnePosition-1).getSpaceName() + " for $" + Board.space.get(playerOnePosition-1).getSpaceCost() + ".");
 			playerOneMoney -= Board.space.get(playerOnePosition-1).getSpaceCost();
 			}
-		else
+		else                                                                                                                         
 			{
 			
 			}
@@ -178,6 +185,19 @@ public class MonopolyRunner
 			else if(Board.space.get(playerOnePosition-1).getSpaceName().equals("Community Chest"))
 				{
 				System.err.println("Community Chest");
+				}
+			else if(Board.space.get(playerOnePosition-1).getSpaceNumber() == 31)
+				{
+				playerOnePosition = 11;
+				playerOneJail = true;
+				playerOneJailTurns = 1;
+				}
+			else if(Board.space.get(playerOnePosition-1).getSpaceNumber() == 31 && playerOneJail == true)
+				{
+				if(playerOneJailTurns == 1 || playerOneJailTurns == 2)
+					{
+					//if
+					}
 				}
 			}
 		}
