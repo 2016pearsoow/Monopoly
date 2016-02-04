@@ -96,8 +96,7 @@ public class MonopolyRunner
 	String sushi = userInput1.nextLine();
 	diceRoll = rollDice();
 	System.out.println("You rolled a " + diceRoll + ".");
-	if(playerOneJail = false)
-	{
+	
 	if(playerOnePosition + diceRoll <= 40)
 		{
 		playerOnePosition += diceRoll;
@@ -108,7 +107,7 @@ public class MonopolyRunner
 		playerOneMoney += 200;
 		System.out.println("You have collected $200 for passing Go.");
 		}
-	}
+	
 	System.out.println("You have landed on " + Board.space.get(playerOnePosition-1).getSpaceName() + ".");
 	if(Board.space.get(playerOnePosition-1).isSpaceOwned() == false)
 		{
